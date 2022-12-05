@@ -1,0 +1,9 @@
+/build
+/*.*
+/dist
+/node_modules
+/src/App.tsx
+/src/index.tsx
+src/Components/MainContent/MainContent.tsx
+src/Components/Tilte/Title.tsx
+src/State/State.ts

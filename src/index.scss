@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.ant-layout {
+  min-height: 100vh;
+ 
+.ant-layout-header {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  padding-inline: 0px;
+  color: #FFFFFF(0, 0, 0, 0.88);
+  line-height: 10px;
+  background: #27272A;
+}
+.ant-layout-content {
+  background: #202124;
+}
+}
+.ant-tabs {
+  height: 44px;
+}
+.ant-tabs-tab-btn {
+  bottom:10px;
+  color: #A1A1AA;
+}
+.ant-menu-title-content:hover a,
+.ant-tabs-tab-btn:hover {
+  color: #FFFFFF !important;
+}
+
+.ant-tabs-tab + .ant-tabs-tab {
+  margin: 0 0 0 28px;
+}
+.ant-tabs {
+  line-height: 1.5;
+}
+
+.ant-tabs-top > .ant-tabs-nav::before {
+  border-color: #414144
+  !important;
+}
+.ant-tabs .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #FFFFFF;
+  // text-shadow: 0 0 0.25px currentcolor;
+}
+
+.ant-tabs-ink-bar {
+  background-color: #FFFFFF !important;
+}
+.ant-menu-inline {
+  
+}
+
+.ant-menu-inline >.ant-menu-submenu>.ant-menu-submenu-title {
+  height: 44px;
+  line-height: 20px;
+  color: #FFFFFF;
+  &:hover {
+    color: #A1A1AA !important;
+  }
+}
+.ant-menu .ant-menu-submenu-title {
+  border-radius: 0% !important;
+  border-bottom: 1px solid #414144;
+  margin: 0 !important;
+  width: 100%;
+}
+
+.ant-menu-light {
+  color: #FFFFFF;
+  background: #27272A;
+  border: 1px solid #414144 !important;
+  
+}
+
+.ant-menu-inline .ant-menu-item {
+  height: 44px;
+  line-height: 40px;
+  list-style-position: inside;
+  list-style-type: disc;
+  &:hover {
+    color: #FFFFFF !important;
+  }
+}
+.ant-menu-item-selected {
+  background-color: #A1A1AA !important;
+  color: #FFFFFF !important;
+  border-radius: 0% !important;
+}
+.ant-layout {
+  padding:0% !important;
+}
+.ant-table-tbody {
+  background-color: #202124
+  !important;
+}
+
+.ant-table-tbody .ant-table-row {
+  background-color: #202124
+  !important;
+  color: #FFFFFF;
+}
+.ant-table-tbody > tr.ant-table-row:hover > td,
+.ant-table-tbody > tr > td.ant-table-cell-row-hover {
+  background-color: #202124 !important;
+}
+.ant-table-wrapper .ant-table-thead >tr>th {
+  background-color: #202124 !important;
+  border-radius: 0% !important;
+  border: 1px solid #414144;
+  color: #FFFFFF;
+}
+.ant-table-wrapper .ant-table-pagination.ant-pagination {
+  display: none;
+}

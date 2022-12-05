@@ -8,19 +8,40 @@
     "@testing-library/user-event": "^13.5.0",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.3",
+    "@types/prettier": "^2.7.1",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@types/react-redux": "^7.1.24",
+    "@types/swiper": "^6.0.0",
+    "@typescript-eslint/parser": "^5.25.0",
+    "antd": "^5.0.1",
+    "axios": "^1.2.0",
+    "compression-webpack-plugin": "^10.0.0",
+    "crypto-browserify": "^3.12.0",
+    "fork-ts-checker-webpack-plugin": "^7.2.13",
+    "gh-pages": "^4.0.0",
+    "gsap": "^3.11.3",
+    "path-browserify": "^1.0.1",
+    "prettier": "^2.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
+    "simple-progress-webpack-plugin": "^2.0.0",
+    "stream-browserify": "^3.0.0",
+    "swiper": "^8.4.4",
     "typescript": "^4.9.3",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "craco start",
+    "build": "craco build",
+    "test": "craco test",
+    "predeploy": "craco build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +60,25 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "sass": "^1.56.1",
+    "@craco/craco": "^6.4.3",
+    "@typescript-eslint/parser": "^4.22.0",
+    "compression-webpack-plugin": "^9.2.0",
+    "craco-alias": "^3.0.1",
+    "craco-antd": "^2.0.0",
+    "craco-less": "^2.0.0",
+    "eslint": "^7.24.0",
+    "eslint-config-airbnb-typescript": "^12.3.1",
+    "eslint-config-prettier": "^8.2.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "simple-progress-webpack-plugin": "^2.0.0",
+    "stylelint": "^14.8.2",
+    "stylelint-config-prettier": "^9.0.3",
+    "stylelint-config-rational-order": "^0.1.2",
+    "stylelint-config-standard": "^25.0.0",
+    "stylelint-declaration-block-no-ignored-properties": "^2.5.0",
+    "stylelint-scss": "^4.2.0"
   }
 }
