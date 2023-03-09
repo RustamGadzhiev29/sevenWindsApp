@@ -4,8 +4,6 @@ import { CaretLeftOutlined, MenuOutlined } from "@ant-design/icons";
 import style from "./HeaderApp.module.scss";
 import { Header } from "antd/es/layout/layout";
 
-// const { TabPane } = Tabs;
-
 const items = [
   {
     label: "Просмотр",

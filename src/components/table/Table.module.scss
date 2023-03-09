@@ -1,0 +1,34 @@
+
+
+.tableConteainer {
+    color: #fff;
+    background-color: #202124;
+
+    th:first-child {
+        width: 110px;
+    }
+    th:nth-child(2) {
+        width: 757px;
+    }
+    th:nth-child(n+3) {
+        width: 200px;
+    }
+
+}
+
+// .title {
+//     background: #27272A;
+//     // border: 1px solid #414144;
+//     border-right: 1px solid #414144;
+//     border-top: 1px solid #414144;
+//     border-bottom: 1px solid #414144;
+
+//     height: 44px;
+
+//     >span {
+//         display: inline-block;
+//         border-right: 1px solid #414144;
+//         padding: 10px;
+//         color: #fff;
+//     }
+// }

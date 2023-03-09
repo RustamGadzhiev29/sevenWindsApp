@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./App.module.scss";
 // import Header from './header/Header';
-import { Breadcrumb, Layout, Menu, Table } from "antd";
+import { Layout } from "antd";
 import "./index.scss";
 import {
   LaptopOutlined,
@@ -10,9 +10,9 @@ import {
   LayoutOutlined
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-import TableApp from "./tableApp/TableApp";
-import MenuApp from "./menuApp/MenuApp";
-import HeaderApp from "./header/HeaderApp";
+import MenuApp from "./components/menuApp/MenuApp";
+import HeaderApp from "./components/header/HeaderApp";
+import Table from "./components/table/Table";
 
 const { Content, Sider } = Layout;
 
@@ -30,10 +30,11 @@ const App: React.FC = () => (
           style={{
             padding: 0,
             margin: 0,
-            minHeight: 280,
+            height: 100,
+
           }}
         >
-          <TableApp />
+          <Table />
         </Content>
       </Layout>
     </Layout>

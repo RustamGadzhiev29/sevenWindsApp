@@ -1,10 +1,9 @@
 /* eslint-disable comma-dangle */
 import React from "react";
 import { Menu } from "antd";
-import "../index.scss";
 import { LayoutOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
-// import style from "./MenuApp.module.scss";
+import style from "./MenuApp.module.scss";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -26,7 +25,7 @@ function getItem(
 const items2: MenuItem[] = [
   getItem(
     <LayoutOutlined />,
-    <div className="">
+    <div className={style.menuContainer}>
       Название проекта <br /> Аббревиатура
     </div>,
     "2",
@@ -45,7 +44,7 @@ const MenuApp = () => {
       style={{
         height: "100%",
         borderRight: 0,
-        width: "256",
+        width: "234px",
       }}
       items={items2}
     />

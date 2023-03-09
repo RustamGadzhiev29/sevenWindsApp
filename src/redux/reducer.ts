@@ -1,140 +1,199 @@
-// import { ThunkDispatch } from "redux-thunk";
-// import { ReducerType } from "./redux-store";
+import rowsApi from "../api/Api";
+import { DataType, DomainDataType } from "../types/types";
 
-// export type RowTiype = {
-//   equipmentCosts: string;
-//   estimatedProfit: string;
-//   machineOperatorSalary: string;
-//   mainCosts: string;
-//   materials: string;
-//   mimExploitation: string;
-//   overheads: string;
-//   parentId: string;
-//   rowName: string;
-//   salary: string;
-//   supportCosts: string;
-// };
+const GET_ROWS = "GET-ROWS";
+const CREATE_ROW = "CREATE-ROW";
+const CREATE_LOCAL_ROW = "CREATE-LOCAL-ROW";
+const SET_EDITE_ROW = "SET-EDITE-ROW";
+const UPDATE_ROW = "UPDATE-ROW";
+const DELETE_ROW = "DELETE-ROW";
 
+const initialState: Array<DomainDataType> = [];
 
-// function rowReducer (state: postsTypeState = initialState, action: ProfileActionTypes): postsTypeState {
-//     switch (action.type) {
-//         case ADD_ROW_ID_ENITITY: {
+export const reducer = (
+  state: Array<DomainDataType> = initialState,
+  action: ActionType
+): Array<DomainDataType> => {
+  switch (action.type) {
+    case GET_ROWS: {
+      return [...state, ...action.payload];
+    }
+    case CREATE_ROW: {
+      const setRow = (arr: Array<DomainDataType>): Array<DomainDataType> => {
+        return arr.map((ar: DomainDataType) => {
+          if (ar.id !== action.payload.parentId) {
+            if (ar.child) {
+              return { ...ar, child: setRow(ar.child) };
+            }
+          }
+          if (ar.id === action.payload.parentId)
+            return { ...ar, child: [...ar.child, { ...action.payload.row }] };
+          return ar;
+        });
+      };
+      console.log(action.payload.parentId);
 
-//             let newPost: postsType = {
-//                 id: v1(),
-//                 message: action.newPostText,
-//                 countLikes: 0
-//             };
-//             return {
-//                 ...state,
-//                 posts: [...state.posts, newPost],
-//             }
-//         }
-//         case SET_USER_PROFILE: {
-//             return {...state, profile: action.profile}
-//         }
-//         case SET_STATUS_PROFILE: {
-//             return {...state, status: action.status}
-//         }
-//         case SET_STATUS_UPDATE: {
-//             return {...state, status: action.status}
-//         }
-//         case DELETE_POST: {
-//             debugger
-//             // return state.posts.filter(tl => tl.id != action.postId)
+      if (action.payload.parentId === null) {
+        return [
+          ...state,
+          {
+            id: 0,
+            parentId: action.payload.row.parentId,
+            rowName: "string",
+            total: 0,
+            salary: 0,
+            mimExploitation: 0,
+            machineOperatorSalary: 0,
+            materials: 0,
+            mainCosts: 0,
+            supportCosts: 0,
+            equipmentCosts: 0,
+            overheads: 0,
+            estimatedProfit: 0,
+            child: [],
+            edite: true,
+          },
+        ];
+      }
+      return setRow(state);
+    }
+    case SET_EDITE_ROW: {
+      const setEdit = (arr: Array<DomainDataType>): any => {
+        return arr.map((ar) => {
+          if (ar.id !== action.payload.id) {
+            if (ar.child) {
+              return { ...ar, child: setEdit(ar.child) };
+            }
+          }
+          if (ar.id === action.payload.id)
+            return { ...ar, edite: action.payload.edite };
+          return ar;
+        });
+      };
+      return setEdit(state);
+    }
+    case UPDATE_ROW: {
+      const setEdit = (arr: Array<DomainDataType>): any => {
+        return arr.map((ar) => {
+          if (ar.id !== action.payload.id) {
+            if (ar.child) {
+              return { ...ar, child: setEdit(ar.child) };
+            }
+          }
+          if (ar.id === action.payload.id)
+            return {
+              ...ar,
+              id: action.payload.row.id,
+              estimatedProfit: action.payload.row.estimatedProfit,
+              overheads: action.payload.row.overheads,
+              equipmentCosts: action.payload.row.equipmentCosts,
+              machineOperatorSalary: action.payload.row.machineOperatorSalary,
+              rowName: action.payload.row.rowName,
+              edite: action.payload.row.edite,
+            };
+          return ar;
+        });
+      };
+      return setEdit(state);
+    }
+    case DELETE_ROW: {
+      const deleteRow = (arr: Array<DomainDataType>): Array<DomainDataType> => {
+        return arr
+          .map((ar) =>
+            ar.child
+              ? {
+                  ...ar,
+                  child: deleteRow(ar.child),
+                }
+              : ar
+          )
+          .filter((r) => r.id !== action.payload.id);
+      };
 
-//             return {...state,
-//                 posts: state.posts.filter(p => p.id !== action.postId)}
-//         }
-//         case SET_SAVE_PHOTO:
-//             return {...state, profile: {...state.profile, photos: action.photo} as ProfileType}
+      return deleteRow(state);
+    }
+    default:
+      return state;
+  }
+};
 
+export const getRowsAC = (rows: Array<DomainDataType>) =>
+  ({
+    type: GET_ROWS,
+    payload: rows,
+  } as const);
 
-//         default:
-//             return state
-//     }
+export const createRowAC = (row: DomainDataType, parentId: number | null) =>
+  ({
+    type: CREATE_ROW,
+    payload: { row, parentId },
+  } as const);
 
+export const createLocalRowAC = (parentId: number | null) =>
+  ({
+    type: CREATE_LOCAL_ROW,
+    payload: { parentId },
+  } as const);
 
-// }
-// /// ////////*********TYPES**********//////////
+export const setEditRowAC = (id: number, edite: boolean) =>
+  ({
+    type: SET_EDITE_ROW,
+    payload: {
+      id,
+      edite,
+    },
+  } as const);
 
-// const ADD_ROW_ID_ENITITY = "ADD_ROWS_ID_ENTITY";
-// const SET_ROWS_ENITITY = "SET_ROWS_ENITITY";
-// const ADD_ROW_ENITITY = "ADD_ROW_ENITITY";
-// const SET_ROW_ENITITY_UPDATE = "SET_ROW_ENITITY_UPDATE";
-// const DELETE_ROW_ENITITY = "DELETE_ROW_ENITITY";
+export const updateRowAC = (id: number, row: DomainDataType) =>
+  ({
+    type: UPDATE_ROW,
+    payload: {
+      id,
+      row,
+    },
+  } as const);
 
-// type addRowIdEnitityType = {
-//   type: typeof ADD_ROW_ID_ENITITY;
-// };
+export const deleteRowAC = (id: number) =>
+  ({
+    type: DELETE_ROW,
+    payload: { id },
+  } as const);
 
-// type setRowsEnitityType = {
-//   type: typeof SET_ROWS_ENITITY;
-//   status: string;
-// };
-// type addRowEnitityType = {
-//   type: typeof ADD_ROW_ENITITY;
-//   postId: number | string;
-// };
+export type ActionType =
+  | ReturnType<typeof getRowsAC>
+  | ReturnType<typeof createRowAC>
+  | ReturnType<typeof createLocalRowAC>
+  | ReturnType<typeof setEditRowAC>
+  | ReturnType<typeof updateRowAC>
+  | ReturnType<typeof deleteRowAC>;
 
-// type setRowEnitityUpdateType = {
-//   type: typeof SET_ROW_ENITITY_UPDATE;
-//   status: string;
-// };
-// type deleteRowEnitityType = {
-//   type: typeof DELETE_ROW_ENITITY;
-// };
+export const getRowsThunkCreator = () => {
+  return (dispatch: (action: ActionType) => void) => {
+    rowsApi.getRows().then((res) => {
+      dispatch(getRowsAC(res.data));
+    });
+  };
+};
 
-// const initialState: RowTiype = {};
+export const updateRowThunkCreator = (row: DomainDataType) => {
+  return (dispatch: (action: ActionType) => void) => {
+    rowsApi.updateRow(row).then((res) => {
+      dispatch(updateRowAC(row.id, res));
+    });
+  };
+};
+export const createRowThunkCreator = (row: DomainDataType, id: number) => {
+  return (dispatch: (action: ActionType) => void) => {
+    rowsApi.createRow(row).then((res) => {
+      dispatch(updateRowAC(id, res));
+    });
+  };
+};
 
-// /// ////////*********ACTIONS**********//////////
-
-// export const addRowIdEnitityAC = (): addRowIdEnitityType => ({type: ADD_POST, newPostText})
-
-
-// export const setUserProfile = (profile: ProfileType | null): setUserProfileType => ({
-//     type: SET_USER_PROFILE, profile: profile
-
-// })
-
-// export const setStatusProfile = (status: string): setStatusProfileType => ({
-//     type: SET_STATUS_PROFILE, status
-// })
-// export const setStatusUpdate = (status: string): setStatusUpdateType => ({
-//     type: SET_STATUS_UPDATE, status
-// })
-// export const deletePostAC = (postId: number|string): deletePostType => ({
-//     type: DELETE_POST, postId
-// })
-// export const setSavePhotoAC = (photo: PhotosType): setSavePhotoType => ({
-//     type: SET_SAVE_PHOTO, photo
-// })
-
-
-// export const addPostActionCreator = (
-//   newPostText: string
-// ): AddPostActionCreatorType => ({ type: ADD_POST, newPostText });
-
-// export const setUserProfile = (
-//   profile: ProfileType | null
-// ): setUserProfileType => ({
-//   type: SET_USER_PROFILE,
-//   profile: profile,
-// });
-
-// export const setStatusProfile = (status: string): setStatusProfileType => ({
-//   type: SET_STATUS_PROFILE,
-//   status,,
-// });
-// export const setStatusUpdate = (status: string): setStatusUpdateType => ({
-//   type: SET_STATUS_UPDATE,
-//   status,,
-// });
-// export const deletePostAC = (postId: number | string): deletePostType => ({
-//   type: DELETE_POST,
-//   postId,,
-// });
-// export const setSavePhotoAC = (photo: PhotosType): setSavePhotoType => ({
-//   type: SET_SAVE_PHOTO,
-//   photo,,
-// });
+export const deleteRowThunkCreator = (id: number) => {
+  return (dispatch: (action: ActionType) => void) => {
+    rowsApi.deleteRow(id).then((res) => {
+      dispatch(deleteRowAC(id));
+    });
+  };
+};

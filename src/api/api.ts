@@ -1,49 +1,29 @@
-/* eslint-disable comma-dangle */
-import axios from "axios";
-
-const BASE_URL = "http://185.244.172.108:8081/";
-
-const instance = axios.create({
-  withCredentials: true,
-  baseURL: BASE_URL,
-});
+import { DataType, DomainDataType } from "../types/types";
+import { instance } from "./config/index";
 
 const rowsApi = {
-  async getRows(eID: string) {
-    const response = await instance.get(
-      `v1/outlay-rows/entity/${eID}/row/list`
-    );
-    return response.data;
-  },
-
-  async createRows(eID: string) {
-    const response = await instance.post(
-      `v1/outlay-rows/entity/${eID}/row/create`
-    );
-
-    return response.data;
-  },
-
-  async updateRow(eID: string, rID: number) {
-    const response = await instance.post(
-      `v1/outlay-rows/entity/${eID}/row/${rID}/update`
-    );
-
-    return response;
-  },
-
-  async deleteRow(eID: string, rID: number) {
-    const response = await instance.delete(
-      `v1/outlay-rows/entity/${eID}/row/${rID}/delete`
+  async getRows() {
+    const response = await instance.get<Array<DomainDataType>>(
+      `/57964/row/list`
     );
     return response;
   },
-  async getUsers(pageSize = 1, currentPage = 10) {
-    const response = await instance.get(
-      `users?page=${currentPage}
-&count=${pageSize}`
-    );
-    return response.data;
+  async createRow(items: DomainDataType) {
+    const response = await instance.post(`/57964/row/create`, {
+      ...items,
+    });
+    console.log(response.data.current);
+    return response.data.current;
+  },
+  async updateRow(items: DataType) {
+    const response = await instance.post(`/57964/row/${items.id}/update`, {
+      ...items,
+    });
+    return response.data.current;
+  },
+  async deleteRow(id: number) {
+    const response = await instance.delete(`/57964/row/${id}/delete`);
+    return response.data.current;
   },
 };
 
