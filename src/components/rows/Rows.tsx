@@ -11,11 +11,7 @@ type PropsType = {
   parentId: null | number;
 };
 
-const Rows: FC<PropsType> = ({ item, parentId }) => {
-  // useEffect(() => {
-  //   setState(items);
-  // }, []);
-
+export const Rows: FC<PropsType> = ({ item, parentId }) => {
   return (
     <>
       <tr key={item.id} className={style.row}>
@@ -28,5 +24,3 @@ const Rows: FC<PropsType> = ({ item, parentId }) => {
     </>
   );
 };
-
-export default Rows;
